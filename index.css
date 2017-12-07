@@ -1,0 +1,185 @@
+body {
+  font-family: 'Alegreya', serif;
+  background-color: #F1D9B3;
+  opacity: .8;
+}
+
+
+
+/***************************************************
+  START-PAGE STYLING
+***************************************************/
+
+header {
+  border: 2px darkgrey solid;
+  border-radius: 5px;
+}
+
+header, .start-button {
+  background-color: rgb(244, 225, 196);
+}
+
+.header-div {
+  margin-top: 50px;
+}
+
+h2 {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+h1, .start-page-header {
+  font-family: 'Uncial Antiqua', cursive;
+}
+
+h1, .start-page-header-author {
+  color: #000;
+}
+
+.start-page-header-author {
+  font-size: 12px;
+}
+
+.start-page-header-quote {
+  color: #780000;
+  font-size: 20px;
+}
+
+.hide-start-page {
+  display: none;
+}
+
+.start-page-middle {
+  margin-top: 30px;
+}
+
+.start-page-form {
+  margin-top: 25px;
+}
+
+
+
+.start-button {
+  font-size: 16px;
+}
+
+
+
+/***************************************************
+  QUIZ-QUESTIONS STYLING
+***************************************************/
+
+.main-quiz-form {
+  background-color: rgb(244, 225, 196);
+  border: 2px darkgrey solid;
+  border-radius: 5px;
+}
+
+.answer-to-question {
+  background-color: rgb(244, 225, 196);
+  margin: 15px;
+  font-size: 18px;
+}
+
+.quiz-div {
+  margin-top: 50px;
+}
+
+.quiz-questions {
+  color: #780000;
+  font-size: 23px;
+}
+
+.submit-question, .close {
+  background-color: #F1D9B3;
+}
+
+.submit-question {
+  margin-left: 18px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.score-and-question {
+  margin-left: 18px;
+  font-size: 18px;
+}
+
+.current-question-div, .current-score-div, .score-and-question, .submit-div {
+  display: inline-block;
+}
+
+.current-question-div {
+  margin-right: 16px;
+}
+
+.answer-to-question {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+
+/***************************************************
+  RESULTS-PAGE STYLING
+***************************************************/
+
+.final-results {
+  text-align: center;
+  color: #780000;
+  font-size: 32px;
+}
+
+.start-over {
+  background-color: rgb(244, 225, 196);
+  font-size: 22px;
+  padding: 5px;
+}
+
+
+
+/***************************************************
+  POP-UP-IMAGE STYLING
+***************************************************/
+
+.body-transparent {
+  opacity: .1;
+}
+
+.pop-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.pop-inner {
+  margin-top: 100px;
+  width: 520px;
+  height: 420px;
+  padding: 25px;
+  padding-bottom: 50px;
+  border: 3px darkgrey solid;
+  background-color: rgb(244, 225, 203);
+}
+
+.incorrect-text {
+  font-size: 19px;  
+  text-align: center;
+}
+
+.pop-up-image {
+  height: 70%;
+  width: 85%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
