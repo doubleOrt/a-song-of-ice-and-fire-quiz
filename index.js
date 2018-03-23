@@ -20,13 +20,13 @@
   //Each object contains the question, an array of the possible answers, and the correct answer.
   let questions = [
     {
-      text: "Which one of Daenerys' handmaidens died in the red waste prior to arriving in Qarth?",
+      text: "Which one of Daenerys' handmaidens died in The Red Waste prior to arriving in Qarth ?",
       options: ['Irri', 'Doreah', 'Jhiqui', 'Missandei'],
       answerIndexInOptions: 1
     },
     {
-      text: "Which one of the nine free cities of Essos was not originally a colony of Old Valyria?",
-      options: ['Pentos', 'Bravoos', 'Volantis', 'Myr'],
+      text: "Which one of the nine free cities of Essos was not originally a colony of Old Valyria ?",
+      options: ['Pentos', 'Braavos', 'Volantis', 'Myr'],
       answerIndexInOptions: 1
     },
     {
@@ -36,7 +36,7 @@
     },
     {
       text: "During one of Arya's dancing lessons, Syrio Forel talks of an exotic land with lizards with scythes for claws. What continent is he alluding to?",
-      options: ['Sorthoryos', 'Ulthos', 'Great Moraq', 'Essos'],
+      options: ['Sothoryos', 'Ulthos', 'Westeros', 'Essos'],
       answerIndexInOptions: 0
     },
     {
@@ -45,12 +45,12 @@
       answerIndexInOptions: 3
     },
     {
-      text: "What house is home to Greywater Watch?",
-      options: ['House Karstark', 'House Reed', 'House Glover', 'House Talhart'],
+      text: "What house is home to Greywater Watch ?",
+      options: ['House Karstark', 'House Reed', 'House Glover', 'House Tallhart'],
       answerIndexInOptions: 1
     },
     {
-      text: "Who died at the hands of Catelyn Stark during the red wedding?",
+      text: "Who died at the hands of Catelyn Stark during the Red Wedding?",
       options: ['Aegon Frey', 'Roslin Frey', 'Joyeuse Erenford', 'Ryman Frey'],
       answerIndexInOptions: 0
     },
