@@ -1,7 +1,6 @@
 
 (function($) {
-
-  const shuffleArray = function shuffleArray(arr) {
+  const shuffleArray = (arr) => {
     let currentIndex = arr.length;
     let temporaryValue;
     let randomIndex;
@@ -18,224 +17,192 @@
     return arr;
   };
 
+  //Each object contains the question, an array of the possible answers, and the correct answer.
+  let questions = [
+    {
+      text: "Which one of Daenerys' handmaidens died in the red waste prior to arriving in Qarth?",
+      options: ['Irri', 'Doreah', 'Jhiqui', 'Missandei'],
+      answerIndexInOptions: 1
+    },
+    {
+      text: "Which one of the nine free cities of Essos was not originally a colony of Old Valyria?",
+      options: ['Pentos', 'Bravoos', 'Volantis', 'Myr'],
+      answerIndexInOptions: 1
+    },
+    {
+      text: "Who forged Robert Baratheon's warhammer?",
+      options: ['Ironbelly', 'Mikken', 'Donal Noye', 'Tobho Mott'],
+      answerIndexInOptions: 2
+    },
+    {
+      text: "During one of Arya's dancing lessons, Syrio Forel talks of an exotic land with lizards with scythes for claws. What continent is he alluding to?",
+      options: ['Sorthoryos', 'Ulthos', 'Great Moraq', 'Essos'],
+      answerIndexInOptions: 0
+    },
+    {
+      text: "Who does Eddard Stark deem the greatest warrior he ever encountered?",
+      options: ['Barristan Selmy', 'Gerold Hightower', 'Oswell Whent', 'Arthur Dayne'],
+      answerIndexInOptions: 3
+    },
+    {
+      text: "What house is home to Greywater Watch?",
+      options: ['House Karstark', 'House Reed', 'House Glover', 'House Talhart'],
+      answerIndexInOptions: 1
+    },
+    {
+      text: "Who died at the hands of Catelyn Stark during the red wedding?",
+      options: ['Aegon Frey', 'Roslin Frey', 'Joyeuse Erenford', 'Ryman Frey'],
+      answerIndexInOptions: 0
+    },
+    {
+      text: "Who attempted to kill Myrcella Baratheon in the midst of Arianne Martell's failed plan to put her on the iron throne?",
+      options: ['Doran Martell', 'Areo Hotah', 'Gerold Dayne', 'Quentyn Martell'],
+      answerIndexInOptions: 2
+    },
+    {
+      text: "Who won the melee at the hand's tourney in King's Landing?",
+      options: ['Beric Dondarrion', 'Loras Tyrell', 'Thoros of Myr', 'Balon Swann'],
+      answerIndexInOptions: 2
+    },
+    {
+      text: "What are the Lannister's house words?",
+      options: ['Growing strong', 'Hear me roar', 'A Lannister always pays his debts', 'We do not sow'],
+      answerIndexInOptions: 1
+    },
+  ];
+  questions.shuffleOptions = () => {
+    questions.forEach( el => {
+      const correctAnswer = el.options[el.answerIndexInOptions];
+      el.options = shuffleArray(el.options);
+      el.answerIndexInOptions = el.options.indexOf(correctAnswer);
+    } );
+  };
+
   const quiz = (function() {
-    const markUp = {
-      getQuestionForm: function getQuestionForm(question) {
-        let markUp =
-          `<div class='quiz-div quiz-col'>
-          <form class='main-quiz-form row'>
-            <div role='radiogroup' aria-label='quiz-question-and-answers'>
-            <p class='quiz-questions'>${question.question}</p>
-            <div>`;
-
-        question.options.forEach( (answer, index) => {
-          markUp +=
-            `<div class="answer-to-question">
-              <input type="radio" id=${answer}
-              name="answer" value=${answer} data-index=${index}
-              ${ index == 0 ? 'required' : null } >
-              <label for=${answer}>${answer}</label>
-            </div>`;
-          } );
-
-        markUp +=
-          `<div class="answer-to-question hidden">
-          <input class ='the-correct-answer' type="radio" id='is${question.answer}'
-          name="answer" value=${question.answer}>
-          <label for=${question.answer}>${question.answer}</label>
-          </div>
-          </div>
-          </div>
-          <div class='submit-div'>
-            <button type="submit" class='submit-question'>Submit answer</button>
-          </div>
-          <div class='score-and-question'>
-          <div class='current-question-div'>
-
-          </div>
-          <div class='current-score-div'>
-
-          </div>
-          </div>
-          </form>
-          </div> `;
-
-        return markUp;
-      },
-      getQuizResults: function getQuizResults(score, total) {
-        return `<div class='row final-results'>
-        <p class='final-score-paragraph'>
-        Your final score is ${score} out of ${total}.
-        <p>
-        <button class="start-over final-score-button">Play Again</button>
-        </div>`;
-      },
-      getIncorrectAnswerPara: function getIncorrectAnswerPara(correctAnswer) {
-        return `<p class='incorrect-text'>
-        You should have chosen ${correctAnswer}.
-        </p>`;
-      },
+    const getFinalResultsString = (score, questionsCount) => {
+      return `Your final score is ${score} out of ${questionsCount}.`;
     };
 
-    return {
-      start: function start() {
-        $('.start-page-div').addClass('hide-start-page');
-      },
-      reset: function reset() {
-        $('main').empty();
-        $('.start-page-div').removeClass('hide-start-page');
-      },
-      setQuestionCount: function setQuestionCount(num, total) {
-        $('.current-question-div').text(
-          `Question: ${num}/${total}`
-        );
-      },
-      setScoreCount: function setScoreCount(num, total) {
-        $('.current-score-div').text(
-          `Score: ${num}/${total}`
-        );
-      },
-      appendQuestion: function appendQuestion(question) {
-        $('main').append(
-          markUp.getQuestionForm( question )
-        );
-      },
-      displayResults: function displayResults() {
-        $('main').append(
-          markUp.getQuizResults(num, total)
-         );
-      },
-      displayPopUp: function displayPopUp(correctAnswer) {
-        $('main, header').addClass('body-transparent');
-        if (!correctAnswer) {
-          $('.pop-outer-correct').fadeIn();
-        } else {
-          $('.pop-outer-incorrect')
-            .fadeIn()
-            .find('.pop-inner-incorrect')
-            .append( markUp.getIncorrectAnswerPara(correctAnswer) );
-        }
-      },
-    };
-  })();
-
-  (function() {
-    //For a quiz app, we have an array of objects.
-    //Each object contains the question, an array of the possible answers, and the correct answer.
-    let questions = [
-      {
-        question: "Which one of Daenerys' handmaidens died in the red waste prior to arriving in Qarth?",
-        options: ['Irri', 'Doreah', 'Jhiqui', 'Missandei'],
-        answer: 1
-      },
-      {
-        question: "Which one of the nine free cities of Essos was not originally a colony of Old Valyria?",
-        options: ['Pentos', 'Bravoos', 'Volantis', 'Myr'],
-        answer: 1
-      },
-      {
-        question: "Who forged Robert Baratheon's warhammer?",
-        options: ['Ironbelly', 'Mikken', 'Donal Noye', 'Tobho Mott'],
-        answer: 2
-      },
-      {
-        question: "During one of Arya's dancing lessons, Syrio Forel talks of an exotic land with lizards with scythes for claws. What continent is he alluding to?",
-        options: ['Sorthoryos', 'Ulthos', 'Great Moraq', 'Essos'],
-        answer: 0
-      },
-      {
-        question: "Who does Eddard Stark deem the greatest warrior he ever encountered?",
-        options: ['Barristan Selmy', 'Gerold Hightower', 'Oswell Whent', 'Arthur Dayne'],
-        answer: 3
-      },
-      {
-        question: "What house is home to Greywater Watch?",
-        options: ['House Karstark', 'House Reed', 'House Glover', 'House Talhart'],
-        answer: 1
-      },
-      {
-        question: "Who died at the hands of Catelyn Stark during the red wedding?",
-        options: ['Aegon Frey', 'Roslin Frey', 'Joyeuse Erenford', 'Ryman Frey'],
-        answer: 0
-      },
-      {
-        question: "Who attempted to kill Myrcella Baratheon in the midst of Arianne Martell's failed plan to put her on the iron throne?",
-        options: ['Doran Martell', 'Areo Hotah', 'Gerold Dayne', 'Quentyn Martell'],
-        answer: 2
-      },
-      {
-        question: "Who won the melee at the hand's tourney in King's Landing?",
-        options: ['Beric Dondarrion', 'Loras Tyrell', 'Thoros of Myr', 'Balon Swann'],
-        answer: 2
-      },
-      {
-        question: "What are the Lannister's house words?",
-        options: ['Growing strong', 'Hear me roar', 'A Lannister always pays his debts', 'We do not sow'],
-        answer: 1
-      }
-    ];
-    questions.shuffleOptions = () => {
-      questions.forEach( el => {
-        const correctAnswer = el.options[el.answer];
-        el.options = shuffleArray(el.options);
-        el.answer = el.options.indexOf(correctAnswer);
-      } );
+    const getIncorrectAnswerString = (correctAnswer) => {
+      return `You should have chosen ${correctAnswer}.`;
     };
 
-    questions = shuffleArray(questions);
-    questions.shuffleOptions();
+    const showPopUp = (popUp, text) => {
+      $('main, header').addClass('body-transparent');
+      popUp
+        .fadeIn()
+        .find('.pop-up-text')
+        .text( text );
+    };
 
-    let questionIndex = 0;
+    const hidePopUp = (popUp) => {
+      $('main, header').removeClass('body-transparent');
+      popUp.fadeOut('fast');
+      popUp.find('pop-up-text').empty();
+    };
+
+    const setQuestionCount = (num, questionsCount) => {
+      $('.current-question-div').text(
+        `Questions: ${num}/${questionsCount}`
+      );
+    };
+
+    const setScoreCount = (score, questionsCount) => {
+      $('.current-score-div').text(
+        `Score: ${score}/${questionsCount}`
+      );
+    };
+
+    const setOption = (answerElem, optionIndex, optionText) => {
+      $(answerElem)
+        .find('input[type="radio"]')
+        .prop('checked', optionIndex === 0)
+        .attr( {
+          'id': optionText,
+          'value': optionText,
+          'data-index': optionIndex,
+        } );
+      $(answerElem)
+        .find('label')
+        .attr( 'for', optionText )
+        .text( optionText );
+    };
+
+    const setQuestion = (question) => {
+      $('.quiz-questions').text( question.text );
+      $('.answer-to-question').each(
+        (index, elem) => setOption(elem, index, question.options[index])
+       );
+    };
+
+    const showResults = (score, questionsCount) => {
+      $('.final-results').removeClass('hidden');
+      $('.final-score-paragraph').text(
+        getFinalResultsString(score, questionsCount)
+       );
+    };
+
+    const questionsCount = questions.length;
+    let currentQuestionIndex = 0;
     let score = 0;
 
-    $(document).on('submit', '.start-page-form', e => {
-      e.preventDefault();
-      quiz.appendQuestion( questions[questionIndex] );
-      quiz.setScoreCount( score, questions.length );
-      quiz.setQuestionCount( questionIndex, questions.length );
-      quiz.start();
-    });
-
-    $(document).on('click', '.start-over', () => {
-      questionIndex = 0;
-      score = 0;
-      questions = shuffleArray(questions);
-      questions.shuffleOptions();
-      quiz.reset();
-    });
-
-    $(document).on( 'submit', '.main-quiz-form', (e) => {
-      e.preventDefault();
-      const answerIsCorrect = questions[questionIndex].answer === Number(
-          $('.answer-to-question input:checked').attr('data-index')
-        );
-      quiz.displayPopUp(
-        !answerIsCorrect ? questions[questionIndex].options[questions[questionIndex].answer] : null
-       );
-      answerIsCorrect ? score++ : null;
-      questionIndex++;
-      if (questionIndex < questions.length) {
-        $('.quiz-div').remove();
-        // careful! this and the 'questions' variable refer to different things by now, that's why we are not using it here as well.
-        quiz.appendQuestion( questions[questionIndex] );
-        quiz.setScoreCount( score, questions.length );
-        quiz.setQuestionCount( questionIndex, questions.length );
-      } else {
-        quiz.displayResults( score, questions.length );
-      }
-    });
-
-    $(document).on('click', '.pop-outer-correct .close', () => {
-      $('main, header').removeClass('body-transparent');
-      $('.pop-outer-correct').fadeOut('fast');
-    });
-
-    $(document).on('click', '.pop-outer-incorrect .close', () => {
-      $('main, header').removeClass('body-transparent');
-      $('.pop-outer-incorrect').fadeOut('fast');
-      $('.pop-inner-incorrect').find('.incorrect-text').remove();
-    });
-
+    return {
+      start: () => {
+        $('.quiz-div').removeClass('hidden');
+        $('.start-page-div').addClass('hidden');
+        questions = shuffleArray(questions);
+        questions.shuffleOptions();
+        setScoreCount( score, questionsCount );
+        setQuestion( questions[currentQuestionIndex] );
+        setQuestionCount( currentQuestionIndex, questionsCount );
+      },
+      reset: () => {
+        currentQuestionIndex = 0;
+        score = 0;
+        $('.start-page-div').removeClass('hidden');
+        $('.final-results').addClass('hidden');
+      },
+      handleAnswer: () => {
+        const isAnswerCorrect = questions[currentQuestionIndex].answerIndexInOptions === Number(
+            $('.answer-to-question input:checked').attr('data-index')
+          );
+        const correctAnswer =
+          questions[currentQuestionIndex].options[questions[currentQuestionIndex].answerIndexInOptions];
+        if ( isAnswerCorrect ) {
+          showPopUp( $('.pop-outer-correct'), '' );
+          score++
+        }
+        else {
+          showPopUp(
+            $('.pop-outer-incorrect'),
+            getIncorrectAnswerString( correctAnswer )
+          );
+        }
+        setScoreCount( score, questionsCount );
+      },
+      proceed: () => {
+        currentQuestionIndex++;
+        // if quiz has not ended yet
+        if ( currentQuestionIndex < questionsCount ) {
+          setQuestion( questions[currentQuestionIndex] );
+          setQuestionCount( currentQuestionIndex, questionsCount );
+        } else {
+          $('.quiz-div').addClass('hidden');
+          showResults( score, questionsCount );
+        }
+      },
+      hidePopUp: hidePopUp,
+    };
   })();
+
+$(document).on( 'click', '.start-button', quiz.start );
+$(document).on( 'click', '.start-over', quiz.reset );
+$(document).on( 'click', '.submit-question', () => {
+  quiz.handleAnswer();
+  quiz.proceed();
+} );
+$(document).on( 'click', '.pop-outer .close', (ev) => {
+  quiz.hidePopUp( $(ev.target).parents('.pop-outer') )
+} );
 
 })($);

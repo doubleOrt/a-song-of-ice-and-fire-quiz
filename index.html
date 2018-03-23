@@ -16,38 +16,73 @@
       </header>
     </div>
     <div class='start-page-div row'>
-     
-     <div class='start-page-middle'>
-       <h2 class='start-page-header start-page-header-quote'>
-         "WHEN YOU PLAY THE GAME OF THRONES, YOU WIN OR YOU DIE. THERE IS NO MIDDLE GROUND."
-       </h2>
-       <p class='start-page-header start-page-header-author'>-CERSEI LANNISTER</p>
-       <form class='start-page-form'>
-         <button class='start-button main-font'>Play the game of thrones</button>
-       </form>
-     </div>
+      <div class='start-page-middle'>
+        <h2 class='start-page-header start-page-header-quote'>
+          "WHEN YOU PLAY THE GAME OF THRONES, YOU WIN OR YOU DIE. THERE IS NO MIDDLE GROUND."
+        </h2>
+        <p class='start-page-header start-page-header-author'>-CERSEI LANNISTER</p>
+        <form class='start-page-form'>
+          <button type="button" class='start-button main-font'>Play the game of thrones</button>
+        </form>
+      </div>
     </div>
     <main role='main'>
-      
+      <div class='quiz-div quiz-col hidden'>
+        <form class='main-quiz-form row'>
+          <div role='radiogroup' aria-label='quiz-question-and-answers'>
+            <p class='quiz-questions'></p>
+            <div>
+              <div class="answer-to-question">
+                <input type="radio" id="" name="answer" value="" data-index="" checked>
+                <label for=""></label>
+              </div>
+              <div class="answer-to-question">
+                <input type="radio" id="" name="answer" value="" data-index="" >
+                <label for=""></label>
+              </div>
+              <div class="answer-to-question">
+                <input type="radio" id="" name="answer" value="" data-index="" >
+                <label for=""></label>
+              </div>
+              <div class="answer-to-question">
+                <input type="radio" id="" name="answer" value="" data-index="" >
+                <label for=""></label>
+              </div>
+            </div>
+          </div>
+          <button type="button" class='submit-question'>Submit answer</button>
+          <div class='score-and-question'>
+            <div class='current-question-div'>
+            </div>
+            <div class='current-score-div'>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class='row final-results hidden'>
+        <p class='final-score-paragraph'>
+        <p>
+        <button class="start-over final-score-button">Play Again</button>
+      </div>
     </main>
     <div class='pop-outer pop-outer-incorrect'>
-        <div class='pop-inner pop-inner-incorrect row'>
-          <button class='close'>X</button>
-          <h2 class='heading-incorrect'>SORRY</h2>
-          <img class='pop-up-image joffrey' src='https://uproxx.files.wordpress.com/2014/04/joff-03.gif?w=650' alt='King Joffrey dying brutally'>
-        </div>
+      <div class='pop-inner pop-inner-incorrect row'>
+        <button class='close'>X</button>
+        <h2 class='heading-incorrect'>SORRY</h2>
+        <img class='pop-up-image joffrey' src='https://uproxx.files.wordpress.com/2014/04/joff-03.gif?w=650' alt='King Joffrey dying brutally'>
+        <p class='pop-up-text'></p>
       </div>
-      
-      <div class='pop-outer pop-outer-correct'>
-        <div class='pop-inner pop-inner-correct row'>
-          <button class='close'>X</button>
-          <h2 class='heading-correct'>CORRECT</h2>
-          <img class='pop-up-image Tyrion' src='http://popwerkz.com/wp-content/uploads/2017/07/tyrion-dancing.gif' alt='Tyrion Lannister dancing merrily'>
-        </div>
+    </div>
+    <div class='pop-outer pop-outer-correct'>
+      <div class='pop-inner pop-inner-correct row'>
+        <button class='close'>X</button>
+        <h2 class='heading-correct'>CORRECT</h2>
+        <img class='pop-up-image Tyrion' src='http://popwerkz.com/wp-content/uploads/2017/07/tyrion-dancing.gif' alt='Tyrion Lannister dancing merrily'>
+        <p class='pop-up-text'></p>
       </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
-
-
