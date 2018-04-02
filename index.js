@@ -194,15 +194,41 @@
       hidePopUp: hidePopUp,
     };
   })();
+  
+  const submitQuestion = () => {
+    quiz.handleAnswer();
+    quiz.proceed();
+  };
+  
+  const closePopUp = ev => 
+    quiz.hidePopUp( $(ev.target).parents('.pop-outer') );
 
-$(document).on( 'click', '.start-button', quiz.start );
-$(document).on( 'click', '.start-over', quiz.reset );
-$(document).on( 'click', '.submit-question', () => {
-  quiz.handleAnswer();
-  quiz.proceed();
-} );
-$(document).on( 'click', '.pop-outer .close', (ev) => {
-  quiz.hidePopUp( $(ev.target).parents('.pop-outer') )
-} );
 
+  const events = [
+    {
+      'type': 'click',
+      'selector': '.start-button', 
+      'handler': quiz.start,
+    },
+    {
+      'type': 'click',
+      'selector': '.start-over', 
+      'handler': quiz.reset,
+    },
+    {
+      'type': 'click',
+      'selector': '.submit-question', 
+      'handler': submitQuestion,
+    },
+    {
+      'type': 'click',
+      'selector': '.pop-outer .close', 
+      'handler': closePopUp,
+    },
+  ];
+
+  events.forEach( (ev) => {
+    $(document).on( ev.type, ev.selector, ev.handler);
+  } );
+  
 })($);
